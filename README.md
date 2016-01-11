@@ -13,8 +13,8 @@ git push -u origin master</br>
 $ ssh-add /home/jeffrey/.ssh/id_rsa</br>
 $ git clone git@github.com:JeffreyLau/MobileGuard.git</br>
 $ git commit -a -m "update all "</br>
-$ git rm -r gen
-$ git commit -m "delete gen from git "
-$ git push origin master
+$ git rm -r gen</br>
+$ git commit -m "delete gen from git "</br>
+$ git push origin master</br>
 
 
