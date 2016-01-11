@@ -17,4 +17,8 @@ $ git rm -r gen</br>
 $ git commit -m "delete gen from git "</br>
 $ git push origin master</br>
 
+$ export $TOMCAT/bin:$PATH</br>
+$ startup.sh #start up the tomcat service</br>
+$ shutdown.sh #stop the tomcat service</br>
+
 
