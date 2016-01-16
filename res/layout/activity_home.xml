@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_bkg" >
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/log" />
+
+        <TextView
+            android:id="@+id/tv_app_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/app_label"
+            android:textSize="20sp" />
+
+        <com.chaowei.mobileguard.ui.FocusTextView
+            android:id="@+id/tv_dynamic_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_logo"
+            android:ellipsize="marquee"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:text="@string/dynamic_info"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="enterApplicationSetUi"
+            android:src="@drawable/setting" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gv_home_item"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:numColumns="2" >
+    </GridView>
+
+</LinearLayout>

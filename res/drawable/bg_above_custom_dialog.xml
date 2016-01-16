@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item><shape>
+        <!-- 相关属性
+        android:state_selected是选中
+		android:state_focused是获得焦点
+		android:state_pressed是点击
+		android:state_enabled是设置是否响应事件,指所有事件
+         -->
+
+            <!-- 定义填充的颜色值 
+            <solid android:color="#ff9d77" /> 
+            -->
+            <!-- 设置各个方向的间隔
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" /> 
+			-->
+
+			<!--定义描边的宽度和描边的颜色值
+            <stroke android:width="2dp" android:color="#fad3cf" />  
+			 -->
+            <!--
+        		gradient：渐变
+				android:startColor和android:endColor分别为起始和结束颜色，
+				android:angle是渐变角度，必须为45的整数倍。
+				另外渐变默认的模式为android:type="linear"，即线性渐变，
+				可以指定渐变为径向渐变，android:type="radial"，径向渐变需要指定半径android:gradientRadius="50"
+            -->
+            <gradient android:angle="270" android:endColor="#e1e1e1" android:startColor="#e1e1e1" />
+            <!-- 设置四个角的半径
+				android:Radius="20dp"               设置四个角的半径
+				android:topLeftRadius="20dp"        设置左上角的半径 
+				android:topRightRadius="20dp"       设置右上角的半径 
+				android:bottomLeftRadius="20dp"     设置右下角的半径 
+				android:bottomRightRadius="20dp"    设置左下角的半径
+            -->
+            <corners android:topLeftRadius="15dp" android:topRightRadius="15dp" />
+        </shape></item>
+
+</selector>

@@ -1,0 +1,36 @@
+
+<resources>
+    <color name="bg_button_text">#FFFFFF</color>
+    
+    <!-- 
+	<color name="bg_button_confirm">#ffd9534f</color>
+	<color name="bg_button_confirm_edge">#ffd43f3a</color>
+	<color name="bg_button_confirm_pressed">#ffd2322d</color>
+	<color name="bg_button_confirm_pressed_edge">#ffac2925</color>	
+	<color name="bg_button_confirm_disabled">#a5d9534f</color>
+	<color name="bg_button_confirm_disabled_edge">#a5d43f3a</color>
+	 -->
+	<color name="bg_button_confirm">#50F96939</color>
+	<color name="bg_button_confirm_edge">#22d43f3a</color>
+	<color name="bg_button_confirm_pressed">#00F96939</color>
+	<color name="bg_button_confirm_pressed_edge">#22ac2925</color>	
+	<color name="bg_button_confirm_disabled">#50F95C19</color>
+	<color name="bg_button_confirm_disabled_edge">#22d43f3a</color>
+	
+	<color name="bg_button_cancel">#5027D3cD</color>
+	<color name="bg_button_cancel_edge">#2246b8da</color>
+	<color name="bg_button_cancel_pressed">#0039b3d7</color>
+	<color name="bg_button_cancel_pressed_edge">#22269abc</color>
+	<color name="bg_button_cancel_disabled">#5027C3AD</color>
+	<color name="bg_button_cancel_disabled_edge">#2246b8da</color>		
+	
+	<!-- 
+	<color name="bg_button_cancel">#ff5bc0de</color>
+	<color name="bg_button_cancel_edge">#ff46b8da</color>
+	<color name="bg_button_cancel_pressed">#ff39b3d7</color>
+	<color name="bg_button_cancel_pressed_edge">#ff269abc</color>
+	<color name="bg_button_cancel_disabled">#a55bc0de</color>
+	<color name="bg_button_cancel_disabled_edge">#a546b8da</color>
+	 -->
+</resources>
+    

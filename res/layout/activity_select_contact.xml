@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#99CCFF"
+        android:gravity="center"
+        android:text="选择联系人"
+        android:textColor="#BB000000"
+        android:textSize="18sp" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/lv_select_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fastScrollEnabled="true" >
+        </ListView>
+
+        <LinearLayout
+            android:id="@+id/ll_load_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在加載,請耐心等待" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

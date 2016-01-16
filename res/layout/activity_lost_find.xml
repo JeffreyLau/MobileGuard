@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/text_setup_title"
+        android:gravity="center"
+        android:text="手机防盗" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_cancel_selector"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="安全號碼" />
+
+        <TextView
+            android:id="@+id/tv_lostfind_safenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="5556" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:onClick="changeProtectStatus"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_cancel_selector"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="防盜保護狀態" />
+
+        <ImageView
+            android:id="@+id/iv_lostfind_statuslock"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/lock" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_cancel_selector"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:onClick="reloadSetUpUi"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="重新進入設置向導" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#33000000"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="功能介紹"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/star"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="GPS追蹤：＃*location*#" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/star"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="播放報警音樂：#alarm*#" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/star"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="遠程刪除數據:#*wipedata*#" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/star"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="遠程鎖屏:#*lockscreen*#" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+</LinearLayout>
