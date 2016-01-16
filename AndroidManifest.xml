@@ -9,6 +9,15 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MGApplication"
@@ -26,6 +35,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activitys.HomeActivity" >
+        </activity>
+        <activity android:name=".activitys.SettingActivity" >
+        </activity>
+        <activity android:name=".activitys.LostFindActivity" >
+        </activity>
+        <activity android:name=".activitys.Setup1Activity" >
+        </activity>
+        <activity android:name=".activitys.Setup2Activity" >
+        </activity>
+        <activity android:name=".activitys.Setup3Activity" >
+        </activity>
+        <activity android:name=".activitys.Setup4Activity" >
+        </activity>
+        <activity android:name=".activitys.SelectContactActivity" >
+        </activity>
+        <activity android:name=".activitys.InterceptActivity" >
+        </activity>
+          <activity android:name=".activitys.BlackNumberActivity" >
+        </activity>      
+        
+       
+        <receiver android:name=".receiver.MGBootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.SmsReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.MGAdminReceiver"
+            android:description="@string/mg_admin_description"
+            android:label="@string/mg_admin_label"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_sample" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".MGAppService" >
+        </service>
     </application>
 
 </manifest>
