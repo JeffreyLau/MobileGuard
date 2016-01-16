@@ -2,6 +2,7 @@ package com.chaowei.mobileguard.activitys;
 
 import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.db.dao.BlackNumberDao;
+import com.chaowei.mobileguard.domain.BlackNumberInfo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -63,8 +64,13 @@ public class BlackNumberActivity extends Activity {
 		Intent intent = new Intent();
 		if (result) {
 			Toast.makeText(this, "添加黑名单成功", Toast.LENGTH_SHORT).show();
+			// BlackNumberInfo info = new BlackNumberInfo();
+			// info.setNumber(number);
+			// info.setNumber(mode);
+			// intent.putExtra(info);
 			intent.putExtra("flag", true);
-
+			intent.putExtra("number", number);
+			intent.putExtra("mode", mode);
 		} else {
 			Toast.makeText(this, "添加黑名单失败", Toast.LENGTH_SHORT).show();
 			intent.putExtra("flag", false);
