@@ -43,9 +43,9 @@ public class InterceptActivity extends Activity {
 				// TODO Auto-generated method stub
 				super.run();
 				mBlackNumberInfoList = mBlackNumberDao.findAll();
-				SystemClock.sleep(3000);
+				// SystemClock.sleep(3000);
 				runOnUiThread(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
@@ -135,6 +135,7 @@ public class InterceptActivity extends Activity {
 	}
 
 	public void addBlackNumber(View v) {
+		// 获取返回启动方式
 		Intent intent = new Intent(this, BlackNumberActivity.class);
 		startActivityForResult(intent, 0);
 	}
@@ -145,7 +146,13 @@ public class InterceptActivity extends Activity {
 		if (data != null) {
 			boolean flag = data.getBooleanExtra("flag", false);
 			if (flag) {
-				mBlackNumberInfoList = mBlackNumberDao.findAll();
+				// intent.putExtra("number", number);
+				// intent.putExtra("mode", mode);
+				BlackNumberInfo info = new BlackNumberInfo();
+				info.setNumber(data.getStringExtra("number"));
+				info.setMode(data.getStringExtra("mode"));
+				mBlackNumberInfoList.add(info);
+				//mBlackNumberInfoList = mBlackNumberDao.findAll();
 				mInterCeptItemAdapter.notifyDataSetChanged();
 			}
 		}
