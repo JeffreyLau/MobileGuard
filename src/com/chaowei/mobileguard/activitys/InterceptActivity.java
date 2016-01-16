@@ -9,13 +9,13 @@ import com.chaowei.mobileguard.domain.BlackNumberInfo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +26,7 @@ public class InterceptActivity extends Activity {
 	private List<BlackNumberInfo> mBlackNumberInfoList;
 	private BlackNumberDao mBlackNumberDao;
 	private InterCeptItemAdapter mInterCeptItemAdapter;
+	private LinearLayout ll_loading_blacknumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class InterceptActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intercept);
 		lv_intercept = (ListView) findViewById(R.id.lv_intercept);
+		ll_loading_blacknumber = (LinearLayout) findViewById(R.id.ll_loading_blacknumber);
+		ll_loading_blacknumber.setVisibility(View.VISIBLE);
 		mBlackNumberDao = new BlackNumberDao(this);
 		new Thread() {
 			@Override
@@ -40,13 +43,15 @@ public class InterceptActivity extends Activity {
 				// TODO Auto-generated method stub
 				super.run();
 				mBlackNumberInfoList = mBlackNumberDao.findAll();
+				SystemClock.sleep(3000);
 				runOnUiThread(new Runnable() {
-
+					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						mInterCeptItemAdapter = new InterCeptItemAdapter();
 						lv_intercept.setAdapter(mInterCeptItemAdapter);
+						ll_loading_blacknumber.setVisibility(View.INVISIBLE);
 					}
 				});
 			}
@@ -91,7 +96,7 @@ public class InterceptActivity extends Activity {
 				view.setTag(viewHolder);
 			} else {// 复用历史缓存View,减少View对象的创建来达到优化的效果
 				view = convertView;
-				viewHolder = (ViewHolder) view.getTag();//取出子view根据各不同ＩＤ直接取出无需遍历
+				viewHolder = (ViewHolder) view.getTag();// 取出子view根据各不同ＩＤ直接取出无需遍历
 			}
 
 			final BlackNumberInfo info = mBlackNumberInfoList.get(position);

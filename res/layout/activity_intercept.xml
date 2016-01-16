@@ -13,20 +13,45 @@
             android:text="電話攔截" />
 
         <ImageView
-            android:onClick="addBlackNumber"
-            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/bg_menu_add_selector" />
+            android:background="@drawable/bg_menu_add_selector"
+            android:clickable="true"
+            android:onClick="addBlackNumber" />
     </RelativeLayout>
 
-    <ListView
-        android:fastScrollEnabled="true"
-        android:id="@+id/lv_intercept"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/ll_loading_blacknumber"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ProgressBar
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在加载黑名单,请耐心等待......" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_intercept"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fastScrollEnabled="true" >
+        </ListView>
+    </RelativeLayout>
 
 </LinearLayout>
