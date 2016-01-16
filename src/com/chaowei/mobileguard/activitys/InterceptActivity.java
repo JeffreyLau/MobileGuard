@@ -76,45 +76,57 @@ public class InterceptActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			View view;//优化view
-			if (convertView == null) {//服用历史缓存View,减少view对象的创建
+			View view;// 优化ListView
+			ViewHolder viewHolder;
+			if (convertView == null) {// 服用历史缓存View,减少view对象的创建
 				view = View.inflate(InterceptActivity.this,
 						R.layout.item_black_number, null);
-			}else {
+				viewHolder = new ViewHolder();
+				viewHolder.tv_black_mode = (TextView) view
+						.findViewById(R.id.tv_black_mode);
+				viewHolder.tv_black_number = (TextView) view
+						.findViewById(R.id.tv_black_number);
+				viewHolder.iv_black_delete = (ImageView) view
+						.findViewById(R.id.iv_black_delete);
+				view.setTag(viewHolder);
+			} else {// 复用历史缓存View,减少View对象的创建来达到优化的效果
 				view = convertView;
+				viewHolder = (ViewHolder) view.getTag();//取出子view根据各不同ＩＤ直接取出无需遍历
 			}
 
 			final BlackNumberInfo info = mBlackNumberInfoList.get(position);
-			TextView tv_black_mode = (TextView) view
-					.findViewById(R.id.tv_black_mode);
-			TextView tv_black_number = (TextView) view
-					.findViewById(R.id.tv_black_number);
-			ImageView iv_black_delete = (ImageView) view
-					.findViewById(R.id.iv_black_delete);
-			iv_black_delete.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					boolean result = mBlackNumberDao.delete(info.getNumber());
-					if (result) {
-						Toast.makeText(InterceptActivity.this, "删除数据成功",
-								Toast.LENGTH_SHORT).show();
-						mBlackNumberInfoList.remove(info);
-						mInterCeptItemAdapter.notifyDataSetChanged();
-					} else {
-						Toast.makeText(InterceptActivity.this, "删除数据失败",
-								Toast.LENGTH_SHORT).show();
-					}
-				}
-			});
+			viewHolder.iv_black_delete
+					.setOnClickListener(new View.OnClickListener() {
 
-			tv_black_number.setText(info.getNumber());
-			tv_black_mode.setText(info.getMode());
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							boolean result = mBlackNumberDao.delete(info
+									.getNumber());
+							if (result) {
+								Toast.makeText(InterceptActivity.this,
+										"删除数据成功", Toast.LENGTH_SHORT).show();
+								mBlackNumberInfoList.remove(info);
+								mInterCeptItemAdapter.notifyDataSetChanged();
+							} else {
+								Toast.makeText(InterceptActivity.this,
+										"删除数据失败", Toast.LENGTH_SHORT).show();
+							}
+						}
+					});
+
+			viewHolder.tv_black_number.setText(info.getNumber());
+			viewHolder.tv_black_mode.setText(info.getMode());
 
 			return view;
 		}
 
+		private class ViewHolder {
+			TextView tv_black_mode;
+			TextView tv_black_number;
+			ImageView iv_black_delete;
+		}
 	}
 
 	public void addBlackNumber(View v) {

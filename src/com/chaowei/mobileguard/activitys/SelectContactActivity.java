@@ -90,20 +90,33 @@ public class SelectContactActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			View view;
-			if (convertView == null) {//防止内存溢出
+			View view;//优化ListView
+			ViewHolder viewHolder;
+			if (convertView == null) {// 防止内存溢出
 				view = View.inflate(SelectContactActivity.this,
 						R.layout.item_contact, null);
-			} else {
+				//用来记录子view布局的引用
+				viewHolder = new ViewHolder();
+				viewHolder.tv_select_name = (TextView) view
+						.findViewById(R.id.tv_select_name);
+				viewHolder.tv_select_number = (TextView) view
+						.findViewById(R.id.tv_select_number);
+				view.setTag(viewHolder);//在父View里面设置子view布局的标签
+			} else {// 复用历史缓存View,减少View对象的创建来达到优化的效果
 				view = convertView;
+				viewHolder = (ViewHolder) view.getTag();//取出子view的标签
 			}
-			TextView tv_select_name = (TextView) view
-					.findViewById(R.id.tv_select_name);
-			TextView tv_select_number = (TextView) view
-					.findViewById(R.id.tv_select_number);
-			tv_select_name.setText(mListContactInfo.get(position).getName());
-			tv_select_number.setText(mListContactInfo.get(position).getPhone());
+			// 进一步优化代码,达到优化效果
+			viewHolder.tv_select_name.setText(mListContactInfo.get(position)
+					.getName());
+			viewHolder.tv_select_number.setText(mListContactInfo.get(position)
+					.getPhone());
 			return view;
+		}
+
+		private class ViewHolder {
+			TextView tv_select_name;
+			TextView tv_select_number;
 		}
 
 	}
