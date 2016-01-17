@@ -41,6 +41,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_setting_intercep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_setting_ui_middle"
@@ -52,10 +53,11 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="12dp"
-            android:text="顯示選項"
+            android:text="骚扰拦截"
             android:textSize="18sp" />
 
         <com.chaowei.mobileguard.ui.SwitchImageView
+            android:id="@+id/siv_intercept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

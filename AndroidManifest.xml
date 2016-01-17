@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".MGApplication"
@@ -53,10 +54,9 @@
         </activity>
         <activity android:name=".activitys.InterceptActivity" >
         </activity>
-          <activity android:name=".activitys.BlackNumberActivity" >
-        </activity>      
-        
-       
+        <activity android:name=".activitys.BlackNumberActivity" >
+        </activity>
+
         <receiver android:name=".receiver.MGBootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -81,7 +81,9 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".MGAppService" >
+        <service android:name=".PhoneStateService" >
+        </service>
+        <service android:name=".MGLocationService" >
         </service>
     </application>
 

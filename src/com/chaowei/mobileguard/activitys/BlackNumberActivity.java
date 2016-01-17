@@ -1,5 +1,6 @@
 package com.chaowei.mobileguard.activitys;
 
+import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.db.dao.BlackNumberDao;
 import com.chaowei.mobileguard.domain.BlackNumberInfo;
@@ -15,9 +16,6 @@ import android.widget.Toast;
 
 public class BlackNumberActivity extends Activity {
 
-	private static String INTERCEPT_MODE_PHONE = "phone";
-	private static String INTERCEPT_MODE_SMS = "sms";
-	private static String INTERCEPT_MODE_ALL = "all";
 	private EditText et_phone_number;
 	private RadioGroup rg_mode;
 
@@ -49,13 +47,13 @@ public class BlackNumberActivity extends Activity {
 		String mode = "phone";
 		switch (id) {
 		case R.id.rb_phone:
-			mode = INTERCEPT_MODE_PHONE;
+			mode = MobileGuard.INTERCEPT_MODE_PHONE;
 			break;
 		case R.id.rb_sms:
-			mode = INTERCEPT_MODE_SMS;
+			mode = MobileGuard.INTERCEPT_MODE_SMS;
 			break;
 		case R.id.rb_all:
-			mode = INTERCEPT_MODE_ALL;
+			mode = MobileGuard.INTERCEPT_MODE_ALL;
 			break;
 		default:
 			break;

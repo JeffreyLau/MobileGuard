@@ -10,6 +10,7 @@ public class MobileGuard {
 	public static final String SECRET_KEY = "332799bea5b83ab80e16ee448dc5deb9";
 	public static final String SHARE_PREFERENCE = "config";
 	public static final String APP_AUTO_UPDATE = "autoupdate";
+	public static final String APP_AUTO_INTERCEPT = "autointercept";
 	public static final String APP_PASSWORD = "password";
 	public static final String APP_CONFIGED = "configed";
 	public static final String APP_BIND_SIM = "bindsim";
@@ -19,4 +20,11 @@ public class MobileGuard {
 	public static final String APP_FUNCTION_ALARM_PLAY = "#*alarm*#";
 	public static final String APP_FUNCTION_WIPE_DATA = "#*wipedata*#";
 	public static final String APP_FUNCTION_LOCK_SCREEN = "#*lockscreen*#";
+
+	public static final String INTERCEPT_MODE_PHONE = "phone";
+	public static final String INTERCEPT_MODE_SMS = "sms";
+	public static final String INTERCEPT_MODE_ALL = "all";
+
+	public static final String PHONE_STATE_SERVICE = "com.chaowei.mobileguard.PhoneStateService";
+	public static final String GPS_LOCATION_SERVICE = "com.chaowei.mobileguard.MGLocationService";
 }

@@ -1,6 +1,6 @@
 package com.chaowei.mobileguard.receiver;
 
-import com.chaowei.mobileguard.MGAppService;
+import com.chaowei.mobileguard.MGLocationService;
 import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.R;
 
@@ -29,7 +29,7 @@ public class SmsReceiver extends BroadcastReceiver {
 				String body = messages[i].getMessageBody();
 				if (body.equals(MobileGuard.APP_FUNCTION_GPS_LOCATION)) {
 					Log.i(TAG, "返回手機的位置");
-					Intent mIntent = new Intent(context, MGAppService.class);
+					Intent mIntent = new Intent(context, MGLocationService.class);
 					context.startService(mIntent);
 					abortBroadcast();
 				} else if (body.equals(MobileGuard.APP_FUNCTION_ALARM_PLAY)) {

@@ -10,6 +10,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -35,9 +36,9 @@ public class MGApplication extends Application {
 
 	private CharSequence ItemLabels[] = new String[] { "手機防盜", "騷擾攔截", "軟件管家",
 			"進程管理", "流量統計", "手機殺毒", "系統加速", "常用工具" };
-	private int ItemIcons[] = new int[] { R.drawable.lostfind, R.drawable.intercept,
-			R.drawable.rjgj, R.drawable.jcgl, R.drawable.lltj, R.drawable.sjsd,
-			R.drawable.xtjs, R.drawable.cygj };
+	private int ItemIcons[] = new int[] { R.drawable.lostfind,
+			R.drawable.intercept, R.drawable.rjgj, R.drawable.jcgl,
+			R.drawable.lltj, R.drawable.sjsd, R.drawable.xtjs, R.drawable.cygj };
 	private CharSequence[] ItemDescs = new String[] { "遠程定位手機", "全面攔截騷擾",
 			"管理您的軟件", "管理正在運行", "流量一目了然", "病毒無處藏身", "系統快如火箭", "常用工具大全" };
 
@@ -62,7 +63,7 @@ public class MGApplication extends Application {
 	/**
 	 * 功能列表
 	 */
-	private  List<HomeItem> mHomeItemList;
+	private List<HomeItem> mHomeItemList;
 
 	public List<HomeItem> getHomeItemList() {
 		return mHomeItemList;
@@ -72,7 +73,11 @@ public class MGApplication extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-
+		if (!isServiceRunning(this, MobileGuard.PHONE_STATE_SERVICE)) {
+			// 开机运行电话监听服务
+			Intent mIntent = new Intent(this, PhoneStateService.class);
+			startService(mIntent);
+		}
 		mHomeItemList = new ArrayList<HomeItem>();
 		/**
 		 * 初始化功能列表
@@ -85,5 +90,22 @@ public class MGApplication extends Application {
 			mHomeItemList.add(homeItem);
 		}
 		Log.i(TAG, "MGApplication Creat");
+	}
+
+	public static boolean isServiceRunning(Context mContext, String className) {
+
+		boolean isRunning = false;
+		ActivityManager activityManager = (ActivityManager) mContext
+				.getSystemService(Context.ACTIVITY_SERVICE);
+		List<ActivityManager.RunningServiceInfo> serviceList = activityManager
+				.getRunningServices(30);
+
+		for (int i = 0; i < serviceList.size(); i++) {
+			if (serviceList.get(i).service.getClassName().equals(className)) {
+				isRunning = true;
+				break;
+			}
+		}
+		return isRunning;
 	}
 }
