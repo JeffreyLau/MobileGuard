@@ -73,11 +73,7 @@ public class MGApplication extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		if (!isServiceRunning(this, MobileGuard.PHONE_STATE_SERVICE)) {
-			// 开机运行电话监听服务
-			Intent mIntent = new Intent(this, PhoneStateService.class);
-			startService(mIntent);
-		}
+
 		mHomeItemList = new ArrayList<HomeItem>();
 		/**
 		 * 初始化功能列表

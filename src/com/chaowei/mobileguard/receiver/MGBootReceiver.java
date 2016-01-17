@@ -22,17 +22,18 @@ public class MGBootReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 
-		// 开机运行电话监听服务
-		if (!MGApplication.isServiceRunning(context,
-				MobileGuard.PHONE_STATE_SERVICE)) {
-			Intent mIntent = new Intent(context, PhoneStateService.class);
-			context.startService(mIntent);
-		}
-
 		SharedPreferences sharedPreferences = context.getSharedPreferences(
 				MobileGuard.SHARE_PREFERENCE, Context.MODE_PRIVATE);
 		boolean protecting = sharedPreferences.getBoolean(
 				MobileGuard.APP_PROTECT, false);
+		boolean autointercept = sharedPreferences.getBoolean(
+				MobileGuard.APP_AUTO_INTERCEPT, false);
+		
+		if (autointercept) {
+			// 开机运行电话监听服务
+			Intent mIntent = new Intent(context, PhoneStateService.class);
+			context.startService(mIntent);
+		}
 
 		if (protecting) {
 			String bindsim = sharedPreferences.getString(
@@ -50,5 +51,4 @@ public class MGBootReceiver extends BroadcastReceiver {
 			}
 		}
 	}
-
 }

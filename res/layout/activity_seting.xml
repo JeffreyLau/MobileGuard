@@ -37,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="12dp"
-            android:src="@drawable/on" />
+            android:src="@drawable/off" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -63,7 +63,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="12dp"
-            android:src="@drawable/on" />
+            android:src="@drawable/off" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -87,7 +87,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="12dp"
-            android:src="@drawable/on" />
+            android:src="@drawable/off" />
     </RelativeLayout>
 
 </LinearLayout>

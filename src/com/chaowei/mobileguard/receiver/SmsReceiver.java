@@ -1,5 +1,8 @@
 package com.chaowei.mobileguard.receiver;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.chaowei.mobileguard.MGLocationService;
 import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.R;
@@ -12,6 +15,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
+import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver {
 
@@ -27,6 +31,11 @@ public class SmsReceiver extends BroadcastReceiver {
 			for (int i = 0; i < pdus.length; i++) {
 				messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
 				String body = messages[i].getMessageBody();
+				String sender = messages[i].getOriginatingAddress();
+				Date date = new Date(messages[i].getTimestampMillis());
+				SimpleDateFormat sdf = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
+				String sendTime = sdf.format(date);
 				if (body.equals(MobileGuard.APP_FUNCTION_GPS_LOCATION)) {
 					Log.i(TAG, "返回手機的位置");
 					Intent mIntent = new Intent(context, MGLocationService.class);

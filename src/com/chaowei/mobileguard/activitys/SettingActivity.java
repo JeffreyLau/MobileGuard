@@ -9,6 +9,7 @@ import com.chaowei.mobileguard.ui.SwitchImageView;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,13 +35,11 @@ public class SettingActivity extends Activity {
 		siv_update = (SwitchImageView) findViewById(R.id.siv_update);
 		siv_intercep = (SwitchImageView) findViewById(R.id.siv_intercept);
 
-		if (!MGApplication.isServiceRunning(this,
-				MobileGuard.PHONE_STATE_SERVICE)) {
-			siv_intercep.setSwitchStatus(false);
-		}
+		siv_intercep.setSwitchStatus(sharedPreferences.getBoolean(
+				MobileGuard.APP_AUTO_INTERCEPT, false));
 
 		siv_update.setSwitchStatus(sharedPreferences.getBoolean(
-				MobileGuard.APP_AUTO_UPDATE, true));
+				MobileGuard.APP_AUTO_UPDATE, false));
 
 		rl_setting_intercep = (RelativeLayout) findViewById(R.id.rl_setting_intercep);
 		rl_setting_update = (RelativeLayout) findViewById(R.id.rl_setting_update);
@@ -51,8 +50,7 @@ public class SettingActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				siv_update.changeSwitchStatus();
-				android.content.SharedPreferences.Editor editor = sharedPreferences
-						.edit();
+				Editor editor = sharedPreferences.edit();
 				editor.putBoolean(MobileGuard.APP_AUTO_UPDATE,
 						siv_update.getSwitchStatus());
 				editor.commit();
@@ -65,11 +63,6 @@ public class SettingActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				siv_intercep.changeSwitchStatus();
-//				android.content.SharedPreferences.Editor editor = sharedPreferences
-//						.edit();
-//				editor.putBoolean(MobileGuard.APP_AUTO_INTERCEPT,
-//						siv_intercep.getSwitchStatus());
-//				editor.commit();
 				boolean status = siv_intercep.getSwitchStatus();
 				if (status) {
 					Log.i(TAG, "开启电话监听服务");
@@ -82,6 +75,9 @@ public class SettingActivity extends Activity {
 							PhoneStateService.class);
 					stopService(intent);
 				}
+				Editor editor = sharedPreferences.edit();
+				editor.putBoolean(MobileGuard.APP_AUTO_INTERCEPT, status);
+				editor.commit();
 			}
 		});
 	}

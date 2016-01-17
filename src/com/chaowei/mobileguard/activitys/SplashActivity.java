@@ -62,7 +62,7 @@ public class SplashActivity extends Activity {
 				MODE_PRIVATE);
 		tv_app_version = (TextView) findViewById(R.id.tv_app_version);
 		tv_app_version.setText(PackageInfoUtils.getPackageVersion(this));
-		if (sharedPreferences.getBoolean(MobileGuard.APP_AUTO_UPDATE, true)) {
+		if (sharedPreferences.getBoolean(MobileGuard.APP_AUTO_UPDATE, false)) {
 			new ServerLetCallback().start();
 		} else {
 			new Thread() {
