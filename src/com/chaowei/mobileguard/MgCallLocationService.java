@@ -100,24 +100,6 @@ public class MgCallLocationService extends Service {
 
 	}
 
-	public void showMyToast(CharSequence text) {
-		TextView view = new TextView(this);
-		view.setText(text);
-		view.setTextColor(Color.RED);
-		view.setTextSize(20);
-		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-		final WindowManager.LayoutParams params = new LayoutParams();
-		params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		params.format = PixelFormat.TRANSLUCENT;
-		params.type = WindowManager.LayoutParams.TYPE_TOAST;
-		params.setTitle("Toast");
-		params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-				| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-				| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
-		wm.addView(view, params);
-	}
-
 	public class ToastView {
 
 		private View view;
@@ -125,8 +107,15 @@ public class MgCallLocationService extends Service {
 		private WindowManager.LayoutParams params;
 		private TextView tv_toast_location;
 
+		private float startX;
+		private float startY;
+		private float currentX;
+		private float currentY;
+		private float changeX;
+		private float changeY;
+
 		// private ImageView iv_toast_location;
-		private void updateWindowLocation(int dX, int dY) {
+		private void updateWindowLocation(float dX, float dY) {
 			params.x += dX;// 修改Ｘ軸上的位置
 			params.y += dY;// 修改Ｙ軸上的位置
 			wm.updateViewLayout(view, params);
@@ -139,9 +128,9 @@ public class MgCallLocationService extends Service {
 			// 默认view 显示在屏幕的中央　gravity　相对屏幕中央　
 			// params.x;
 			// params.y;
-			//指定參考點爲屏幕左邊上方,
-			//系統默認爲屏幕正中央
-			//params.gravity = Gravity.LEFT + Gravity.TOP;
+			// 指定參考點爲屏幕左邊上方,
+			// 系統默認爲屏幕正中央
+			// params.gravity = Gravity.LEFT + Gravity.TOP;
 			params.height = WindowManager.LayoutParams.WRAP_CONTENT;
 			params.width = WindowManager.LayoutParams.WRAP_CONTENT;
 			params.format = PixelFormat.TRANSLUCENT;
@@ -164,26 +153,26 @@ public class MgCallLocationService extends Service {
 					.findViewById(R.id.tv_toast_location);
 			tv_toast_location.setText(text);
 			view.setOnTouchListener(new View.OnTouchListener() {
-				int startX;
-				int startY;
 
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 
 					switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
-						startX = (int) event.getRawX();
-						startY = (int) event.getRawY();
+						startX = event.getRawX();
+						startY = event.getRawY();
 						break;
 					case MotionEvent.ACTION_MOVE:
-						int newX = (int) event.getRawX();
-						int newY = (int) event.getRawY();
-						int dX = (newX - startX);
-						int dY = (newY - startY);
-						updateWindowLocation(dX, dY);
+						currentX = event.getRawX();
+						currentY = event.getRawY();
+						changeX = (currentX - startX);
+						changeY = (currentY - startY);
+						updateWindowLocation(changeX, changeY);
+						// 一定記得重新賦值起點位置
+						startX = event.getRawX();
+						startY = event.getRawY();
 						break;
 					case MotionEvent.ACTION_UP:
-
 						break;
 					default:
 						break;

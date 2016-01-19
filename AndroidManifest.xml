@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     <uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".MGApplication"
@@ -65,6 +65,11 @@
         </activity>
         <activity android:name=".activitys.NumberQueryActivity" >
         </activity>
+        <activity
+            android:name=".activitys.SmokeActivity"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
 
         <receiver android:name=".receiver.MGBootReceiver" >
             <intent-filter>
@@ -95,6 +100,8 @@
         <service android:name=".MgInCallStateService" >
         </service>
         <service android:name=".MgGpsLocationService" >
+        </service>
+        <service android:name=".MgRoketService" >
         </service>
     </application>
 

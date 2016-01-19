@@ -42,7 +42,7 @@ public class MGApplication extends Application {
 	private CharSequence[] ItemDescs = new String[] { "遠程定位手機", "全面攔截騷擾",
 			"管理您的軟件", "管理正在運行", "流量一目了然", "病毒無處藏身", "系統快如火箭", "常用工具大全" };
 
-	//默认来电提醒的显示风格选择xxx
+	// 默认来电提醒的显示风格选择xxx
 	public static String[] bgNames = new String[] { "半透明", "活力橙", "衛士藍", "金屬灰",
 			"蘋果綠" };
 	public static int[] bgIcons = new int[] { R.drawable.call_locate_white,
@@ -80,7 +80,7 @@ public class MGApplication extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-
+		initApplicationService();
 		mHomeItemList = new ArrayList<HomeItem>();
 		/**
 		 * 初始化功能列表
@@ -110,5 +110,14 @@ public class MGApplication extends Application {
 			}
 		}
 		return isRunning;
+	}
+
+	private void initApplicationService() {
+		Intent mIntent = new Intent(this, MgInCallStateService.class);
+		startService(mIntent);
+		mIntent = new Intent(this, MgCallLocationService.class);
+		startService(mIntent);
+		mIntent = new Intent(this, MgRoketService.class);
+		startService(mIntent);
 	}
 }

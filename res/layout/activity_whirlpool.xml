@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/iv_whirlpool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/whirlpool" />
+
+    <ImageView
+        android:id="@+id/iv_whirlpoolStat2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/desktop_bg_tips_3"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_smoke_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/desktop_smoke_m"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/iv_smoke_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/iv_smoke_down"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/desktop_smoke_t"
+        android:visibility="invisible" />
+
+</RelativeLayout>
