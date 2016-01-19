@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <application
         android:name=".MGApplication"
@@ -58,6 +60,10 @@
         </activity>
         <activity android:name=".activitys.BlackNumberActivity" >
         </activity>
+        <activity android:name=".activitys.CommonToolsActivity" >
+        </activity>
+        <activity android:name=".activitys.NumberQueryActivity" >
+        </activity>
 
         <receiver android:name=".receiver.MGBootReceiver" >
             <intent-filter>
@@ -83,9 +89,11 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".PhoneStateService" >
+        <service android:name=".MgCallLocationService" >
         </service>
-        <service android:name=".MGLocationService" >
+        <service android:name=".MgInCallStateService" >
+        </service>
+        <service android:name=".MgGpsLocationService" >
         </service>
     </application>
 

@@ -20,7 +20,7 @@
         android:id="@+id/rl_setup2_bind_sim"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_cancel_selector"
+        android:background="@drawable/bg_button_cancel_selector"
         android:clickable="true" >
 
         <TextView

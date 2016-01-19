@@ -24,7 +24,7 @@
 
     <Button
         style="@style/text_setup_context"
-        android:background="@drawable/bg_cancel_selector"
+        android:background="@drawable/bg_button_cancel_selector"
         android:clickable="true"
         android:gravity="center"
         android:onClick="selectSafeNumber"

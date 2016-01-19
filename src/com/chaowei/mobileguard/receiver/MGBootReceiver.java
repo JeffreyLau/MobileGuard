@@ -1,18 +1,13 @@
 package com.chaowei.mobileguard.receiver;
 
-import com.chaowei.mobileguard.MGApplication;
 import com.chaowei.mobileguard.MobileGuard;
-import com.chaowei.mobileguard.PhoneStateService;
-import com.chaowei.mobileguard.activitys.SettingActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 public class MGBootReceiver extends BroadcastReceiver {
 
@@ -26,14 +21,10 @@ public class MGBootReceiver extends BroadcastReceiver {
 				MobileGuard.SHARE_PREFERENCE, Context.MODE_PRIVATE);
 		boolean protecting = sharedPreferences.getBoolean(
 				MobileGuard.APP_PROTECT, false);
-		boolean autointercept = sharedPreferences.getBoolean(
-				MobileGuard.APP_AUTO_INTERCEPT, false);
-		
-		if (autointercept) {
-			// 开机运行电话监听服务
-			Intent mIntent = new Intent(context, PhoneStateService.class);
-			context.startService(mIntent);
-		}
+
+		// 开机运行电话监听服务
+		//Intent mIntent = new Intent(context, MgInCallStateService.class);
+		//context.startService(mIntent);
 
 		if (protecting) {
 			String bindsim = sharedPreferences.getString(

@@ -47,7 +47,7 @@ public class BlackNumberDao {
 	}
 
 	public String findMode(String number) {
-		String mode = null;
+		String mode = "";
 		SQLiteDatabase db = mBlackNumberOpenHelper.getReadableDatabase();
 		Cursor cursor = db.query(mBlackNumberOpenHelper.DATABASE_TABLE,
 				new String[] { "mode" }, "number=?", new String[] { number },
@@ -62,7 +62,7 @@ public class BlackNumberDao {
 	}
 
 	public String findId(String number) {
-		String id = null;
+		String id = "";
 		SQLiteDatabase db = mBlackNumberOpenHelper.getReadableDatabase();
 		Cursor cursor = db.query(mBlackNumberOpenHelper.DATABASE_TABLE,
 				new String[] { "_id" }, "number=?", new String[] { number },

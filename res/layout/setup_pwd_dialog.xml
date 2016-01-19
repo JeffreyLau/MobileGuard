@@ -62,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_confirm_selector"
+            android:background="@drawable/bg_button_confirm_selector"
             android:text="@string/confirm"
             android:textColor="#aaffffff"
             android:textSize="15sp" />
@@ -72,7 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_cancel_selector"
+            android:background="@drawable/bg_button_cancel_selector"
             android:text="@string/cancel"
             android:textSize="15sp" />
     </LinearLayout>

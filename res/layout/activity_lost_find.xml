@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_cancel_selector"
+        android:background="@drawable/bg_button_cancel_selector"
         android:clickable="true"
         android:gravity="center_vertical"
         android:padding="10dp" >
@@ -40,7 +40,7 @@
         android:onClick="changeProtectStatus"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_cancel_selector"
+        android:background="@drawable/bg_button_cancel_selector"
         android:clickable="true"
         android:gravity="center_vertical"
         android:padding="10dp" >
@@ -67,7 +67,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_cancel_selector"
+        android:background="@drawable/bg_button_cancel_selector"
         android:clickable="true"
         android:gravity="center_vertical"
         android:onClick="reloadSetUpUi"

@@ -32,6 +32,7 @@ public class HomeActivity extends Activity {
 	private static final String TAG = "HomeActivity";
 	public static final int APP_FUNCTION_LOSTFIND = 0;
 	public static final int APP_FUNCTION_INTERCEPT = 1;
+	public static final int APP_FUNCTION_COMMON_TOOLS = 7;
 	private ImageView iv_log;
 	private GridView gv_home_item;
 	private MGApplication mGApplication;
@@ -92,6 +93,12 @@ public class HomeActivity extends Activity {
 					startActivity(mxIntent);
 					break;
 
+				case APP_FUNCTION_COMMON_TOOLS:
+					mxIntent = new Intent(HomeActivity.this,
+							CommonToolsActivity.class);
+					startActivity(mxIntent);
+					break;		
+					
 				default:
 					break;
 				}

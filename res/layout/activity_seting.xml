@@ -67,9 +67,10 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_setting_showlocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_setting_ui_last"
+        android:background="@drawable/bg_setting_ui_middle"
         android:padding="5dp" >
 
         <TextView
@@ -78,16 +79,35 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="12dp"
-            android:text="顯示選項"
+            android:text="歸屬地顯示"
             android:textSize="18sp" />
 
         <com.chaowei.mobileguard.ui.SwitchImageView
+            android:id="@+id/siv_showlocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="12dp"
             android:src="@drawable/off" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_showlocation_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_setting_ui_middle"
+        android:padding="5dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:text="歸屬地顯示風格"
+            android:textSize="18sp" />
+
     </RelativeLayout>
 
 </LinearLayout>
