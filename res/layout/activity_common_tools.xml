@@ -14,13 +14,13 @@
         android:textSize="20dp" />
 
     <RelativeLayout
-        android:onClick="enterNumberQueryActivity"
-        android:clickable="true"
         android:id="@+id/rl_setting_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_button_cancel_selector"
+        android:clickable="true"
+        android:onClick="enterNumberQueryActivity"
         android:padding="5dp" >
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="12dp"
-            android:text="號碼歸屬地查詢"
+            android:text="號碼歸屬地"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_cancel_selector"
+        android:onClick="enterSmsBackup"
         android:padding="5dp" >
 
         <TextView
@@ -46,7 +47,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="12dp"
-            android:text="工具XXX"
+            android:text="短信备份"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -54,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_cancel_selector"
+        android:onClick="enterSmsRestore"
         android:padding="5dp" >
 
         <TextView
@@ -62,8 +64,36 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="12dp"
-            android:text="工具OOO"
+            android:text="短信还原"
             android:textSize="18sp" />
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_sms_opp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:clickable="false" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ProgressBar
+                android:id="@+id/pb_sms_opp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_sms_opp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pb_sms_opp"
+                android:layout_centerHorizontal="true"
+                android:text="短信備份中請耐心等待" />
+        </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>

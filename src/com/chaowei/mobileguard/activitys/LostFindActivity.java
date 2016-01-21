@@ -6,7 +6,7 @@ import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.receiver.MGAdminReceiver;
 import com.chaowei.mobileguard.ui.IviewDialog;
-import com.chaowei.mobileguard.utils.ContactInfoUtils;
+import com.chaowei.mobileguard.utils.PrivateInfoUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -12,6 +12,7 @@ public class MobileGuard {
     public static final String APP_AUTO_INTERCEPT = "autointercept";
     public static final String APP_AUTO_SHOWLOCATION = "showlocation";
     public static final String APP_SMOKE_START = "smokestart";
+    public static final String APP_SMS_BACKUP_PATH = "smsbackuppath";
 
     public static final String APP_PASSWORD = "password";
     public static final String APP_CONFIGED = "configed";

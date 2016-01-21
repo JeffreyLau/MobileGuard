@@ -8,7 +8,7 @@ import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.MGApplication.HomeItem;
 import com.chaowei.mobileguard.ui.InputPWdDialog;
 import com.chaowei.mobileguard.ui.SetUpPWdDialog;
-import com.chaowei.mobileguard.utils.ContactInfoUtils;
+import com.chaowei.mobileguard.utils.PrivateInfoUtils;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -95,7 +95,7 @@ public class HomeActivity extends Activity {
 
 				case APP_FUNCTION_COMMON_TOOLS:
 					mxIntent = new Intent(HomeActivity.this,
-							CommonToolsActivity.class);
+							ToolsActivity.class);
 					startActivity(mxIntent);
 					break;		
 					

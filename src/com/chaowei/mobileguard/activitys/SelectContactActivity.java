@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.domain.ContactInfo;
-import com.chaowei.mobileguard.utils.ContactInfoUtils;
+import com.chaowei.mobileguard.utils.PrivateInfoUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +36,7 @@ public class SelectContactActivity extends Activity {
 		new Thread() {
 			public void run() {
 
-				mListContactInfo = ContactInfoUtils
+				mListContactInfo = PrivateInfoUtils
 						.getAllContactInfos(SelectContactActivity.this);
 				runOnUiThread(new Runnable() {
 

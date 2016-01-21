@@ -9,7 +9,7 @@ import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.db.dao.BlackNumberDao;
 import com.chaowei.mobileguard.tracker.BaseTracker;
-import com.chaowei.mobileguard.tracker.HandlerTracker;
+import com.chaowei.mobileguard.tracker.AsyncTracker;
 
 import android.app.Activity;
 import android.app.PendingIntent.OnFinished;
@@ -51,7 +51,7 @@ public class SmokeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whirlpool);
         mMotionTracker = new MotionTracker();
-        mBaseTracker = HandlerTracker.getTracker();
+        mBaseTracker = AsyncTracker.getDefaultTracker();
         mBaseTracker.registerForRoketNomal(mMotionTracker,
                 BaseTracker.MOTION_EVENT_ROKET_NOMAL, null);
         mBaseTracker.registerForRoketPrepare(mMotionTracker,
@@ -98,7 +98,7 @@ public class SmokeActivity extends Activity {
                     iv_smoke_down.setVisibility(View.VISIBLE);
                     iv_smoke_up.setVisibility(View.VISIBLE);
                     break;
-                    
+
                 case BaseTracker.MOTION_EVENT_ROKET_STOP:
                     iv_whirlpool.setVisibility(View.INVISIBLE);
                     iv_whirlpoolStat2.setVisibility(View.INVISIBLE);

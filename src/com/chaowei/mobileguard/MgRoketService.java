@@ -3,6 +3,7 @@ package com.chaowei.mobileguard;
 
 import com.chaowei.mobileguard.activitys.SmokeActivity;
 import com.chaowei.mobileguard.tracker.AsyncResult;
+import com.chaowei.mobileguard.tracker.AsyncTracker;
 import com.chaowei.mobileguard.tracker.BaseTracker;
 import com.chaowei.mobileguard.tracker.RegistrantList;
 
@@ -45,8 +46,10 @@ public class MgRoketService extends Service {
     private boolean mIsMoving = false;
     private boolean mIsStart = false;
     private Handler mHandler = new Handler();
+    private BaseTracker mBaseTracker;
 
     private void windInit(Context context) {
+        mBaseTracker = AsyncTracker.getDefaultTracker();
         wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getSize(screenSize);
         view = View.inflate(context, R.layout.layout_roket, null);
@@ -96,16 +99,18 @@ public class MgRoketService extends Service {
                         synchronized (mMoveLock) {// 發射準備
                             if (!mIsMoving) {
                                 mIsMoving = true;
-                                BaseTracker.mRoketPrepareRegistrants
-                                        .notifyRegistrants(new AsyncResult(null, null, null));
+                                mBaseTracker
+                                        .notifyRoketPrepareRegistrants(new AsyncResult(null, null,
+                                                null));
                             }
                         }
                     } else {
                         synchronized (mMoveLock) {// 自由移動
                             if (mIsMoving) {
                                 mIsMoving = false;
-                                BaseTracker.mRoketNomalRegistrants
-                                        .notifyRegistrants(new AsyncResult(null, null, null));
+                                mBaseTracker
+                                        .notifyRoketNomalRegistrants(new AsyncResult(null, null,
+                                                null));
                             }
 
                         }
@@ -115,8 +120,8 @@ public class MgRoketService extends Service {
                     rocketAnimation.stop();
                     if (((screenSize.y - currentY) < 180)
                             && viewInXcenter(currentX)) {// 發射
-                        BaseTracker.mRoketPullRegistrants
-                                .notifyRegistrants(new AsyncResult(null, null, null));
+                        mBaseTracker
+                                .notifyRoketPullRegistrants(new AsyncResult(null, null, null));
                         new Thread() {
                             public void run() {
                                 for (int i = 0; i < 15; i++) {
@@ -132,8 +137,9 @@ public class MgRoketService extends Service {
                                     });
                                 }
                                 // 發射結束
-                                BaseTracker.mRoketStopRegistrants
-                                        .notifyRegistrants(new AsyncResult(null, null, null));
+                                mBaseTracker
+                                        .notifyRoketStopRegistrants(new AsyncResult(null, null,
+                                                null));
                                 synchronized (mMStartLock) {
                                     mIsStart = false;
                                 }
@@ -142,8 +148,8 @@ public class MgRoketService extends Service {
                         }.start();
                     } else {
                         // 發射結束
-                        BaseTracker.mRoketStopRegistrants
-                                .notifyRegistrants(new AsyncResult(null, null, null));
+                        mBaseTracker
+                                .notifyRoketStopRegistrants(new AsyncResult(null, null, null));
                         synchronized (mMStartLock) {
                             mIsStart = false;
                         }
