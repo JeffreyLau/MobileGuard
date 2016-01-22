@@ -5,13 +5,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.xutils.x;
+
 import com.chaowei.mobileguard.tracker.Registrant;
 import com.chaowei.mobileguard.tracker.RegistrantList;
 import com.chaowei.mobileguard.ui.IviewDialog;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -91,6 +89,8 @@ public class MGApplication extends Application {
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
+        x.Ext.init(this);
+        x.Ext.setDebug(BuildConfig.DEBUG);
         initApplicationService();
         mHomeItemList = new ArrayList<HomeItem>();
         /**

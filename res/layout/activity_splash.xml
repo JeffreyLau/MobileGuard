@@ -15,4 +15,33 @@
         android:text="@string/app_version"
         android:textColor="#ffffff" />
 
+    <FrameLayout
+        android:id="@+id/fl_update_opp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ProgressBar
+                android:id="@+id/pb_update_opp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_update_opp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pb_update_opp"
+                android:layout_centerHorizontal="true"
+                android:text="新版本下载中请耐心等待..." />
+        </RelativeLayout>
+    </FrameLayout>
+
 </RelativeLayout>

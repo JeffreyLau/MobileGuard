@@ -14,10 +14,6 @@ import org.json.JSONObject;
 
 import com.chaowei.mobileguard.MGApplication;
 import com.chaowei.mobileguard.R;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.app.ProgressDialog;
 import android.content.Context;
