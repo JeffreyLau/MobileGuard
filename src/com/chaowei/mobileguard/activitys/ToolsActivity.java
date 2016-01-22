@@ -9,14 +9,24 @@ import java.io.OutputStream;
 import java.util.Currency;
 
 import org.xmlpull.v1.XmlSerializer;
+import org.xutils.x;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.common.Callback;
 
+import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.R;
+import com.chaowei.mobileguard.remote.RemoteServerInfo;
+import com.chaowei.mobileguard.remote.UploadCallback;
 import com.chaowei.mobileguard.utils.PrivateInfoUtils;
+
+
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,7 +45,7 @@ public class ToolsActivity extends Activity {
     private FrameLayout fl_sms_opp;
     private ProgressBar pb_sms_opp;
     private TextView tv_sms_opp;
-
+    private SharedPreferences mSharedPreferences;
     private Handler mHandler;
 
     private static final int UPDATE_START_SMS_BACKUP = 0x1000;
@@ -55,6 +65,7 @@ public class ToolsActivity extends Activity {
         pb_sms_opp = (ProgressBar) findViewById(R.id.pb_sms_opp);
         tv_sms_opp = (TextView) findViewById(R.id.tv_sms_opp);
         fl_sms_opp.setVisibility(View.INVISIBLE);
+        mSharedPreferences = getSharedPreferences(MobileGuard.SHARE_PREFERENCE, MODE_PRIVATE);
     }
 
     private class UiHandler extends Handler {
@@ -70,9 +81,11 @@ public class ToolsActivity extends Activity {
                     break;
                 case UPDATE_RUN_SMS_BACKUP:
                     pb_sms_opp.setProgress((Integer) msg.obj);
+
                     break;
                 case UPDATE_STOP_SMS_BACKUP:
                     fl_sms_opp.setVisibility(View.INVISIBLE);
+                    uploadFiletoServer();
                     break;
                 case UPDATE_START_SMS_RESTORE:
                     tv_sms_opp.setText("短信還遠中,請耐心等待...");
@@ -91,8 +104,26 @@ public class ToolsActivity extends Activity {
             }
             super.handleMessage(msg);
         }
+
+
     }
 
+    private void uploadFiletoServer() {
+        RequestParams params =
+                new RequestParams(RemoteServerInfo.SERVER_URL_UPLOAD_INFO);
+        params.setMultipart(true);
+        params.addBodyParameter(
+                "uploadFile",
+                new File(mSharedPreferences.getString(MobileGuard.APP_SMS_BACKUP_PATH,
+                        "/sdcard/smsback.xml")));
+        
+        params.setCancelFast(true);
+        //params.setAutoRename(false);
+        UploadCallback callback = new UploadCallback();
+        Callback.Cancelable cancelable = x.http().post(params, callback);
+        callback.setCancelable(cancelable);
+    }   
+    
     public void enterNumberQueryActivity(View v) {
         Intent intent = new Intent(this, NumberQueryActivity.class);
         startActivity(intent);
