@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:gravity="center_vertical"
+    android:padding="3dp" >
+
+    <ImageView
+        android:id="@+id/iv_processIcon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_processLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_processIcon"
+        android:ellipsize="end"
+        android:paddingRight="5dp"
+        android:paddingTop="3dp"
+        android:singleLine="true"
+        android:text="Label"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/tv_processMemsize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_processLabel"
+        android:layout_toRightOf="@id/iv_processIcon"
+        android:ellipsize="end"
+        android:paddingTop="1dp"
+        android:singleLine="true"
+        android:text="15M"
+        android:textColor="#AA000000"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/cb_processClean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>

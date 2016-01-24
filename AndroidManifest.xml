@@ -74,6 +74,8 @@
         </activity>
         <activity android:name=".activitys.AppManagerActivity" >
         </activity>
+        <activity android:name=".activitys.ProcessManagerActivity" >
+        </activity>
 
         <receiver android:name=".receiver.MGBootReceiver" >
             <intent-filter>

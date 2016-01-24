@@ -4,7 +4,20 @@ package com.chaowei.mobileguard.domain;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
 
-public class AppInfo {
+public class AppItemInfo {
+
+    private Drawable appIcon;
+    private CharSequence appLabel;
+    private CharSequence packageName;
+    private int flag;
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     public Drawable getAppIcon() {
         return appIcon;
@@ -30,37 +43,6 @@ public class AppInfo {
         this.packageName = packageName;
     }
 
-    public long getAppSize() {
-        return appSize;
-    }
-
-    public void setAppSize(long appSize) {
-        this.appSize = appSize;
-    }
-
-    private Drawable appIcon;
-    private CharSequence appLabel;
-    private CharSequence packageName;
-    private long appSize;
-    private int flag;
-    private CharSequence appInternal;
-
-    public CharSequence getAppInternal() {
-        return appInternal;
-    }
-
-    public void setAppInternal(CharSequence appInternal) {
-        this.appInternal = appInternal;
-    }
-
-    public int getFlag() {
-        return flag;
-    }
-
-    public void setFlag(int flag) {
-        this.flag = flag;
-    }
-
     public boolean isSystemApp() {
         return (getFlag() & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
@@ -71,8 +53,8 @@ public class AppInfo {
 
     @Override
     public String toString() {
-        return "AppInfo [appIcon=" + appIcon + ", appLabel=" + appLabel + ", packageName="
-                + packageName + ", appSize=" + appSize + ", flag=" + flag + "]";
+        return "AppItemInfo [appIcon=" + appIcon + ", appLabel=" + appLabel + ", packageName="
+                + packageName + ", flag=" + flag + "]";
     }
 
 }

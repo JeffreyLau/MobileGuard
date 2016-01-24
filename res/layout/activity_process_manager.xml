@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/text_title"
+        android:text="进程管理" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tv_process_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="3dp"
+            android:text="运行中进程个数:xx"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tv_memory_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="3dp"
+            android:text="剩余内存数:xx"
+            android:textColor="#000000" />
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/lv_all_process"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </ListView>
+
+        <TextView
+            android:id="@+id/tv_default_scroll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FF888888"
+            android:visibility="invisible"
+            android:textColor="#FFFFFF" />
+
+        <LinearLayout
+            android:id="@+id/ll_load_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在加載,請耐心等待" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.chaowei.mobileguard.R;
-import com.chaowei.mobileguard.domain.AppInfo;
+import com.chaowei.mobileguard.domain.AppPackageInfo;
 import com.chaowei.mobileguard.utils.PackageInfoUtils;
 import com.chaowei.mobileguard.utils.SystemInfoUtils;
 
@@ -41,9 +41,9 @@ public class AppManagerActivity extends Activity {
     private TextView tv_default_scroll;
     private ListView lv_all_app;
     private LinearLayout ll_load_layout;
-    private List<AppInfo> mAppInfoList;
-    private List<AppInfo> mSystemAppInfoList;
-    private List<AppInfo> mUserAppInfoList;
+    private List<AppPackageInfo> mAppInfoList;
+    private List<AppPackageInfo> mSystemAppInfoList;
+    private List<AppPackageInfo> mUserAppInfoList;
     private PopupWindow mPopupWindow;
     private AppUninstallBroadCast mAppUninstallBroadCast;
     private ItemAdapter mItemAdapter;
@@ -86,10 +86,10 @@ public class AppManagerActivity extends Activity {
         public void run() {
             // TODO Auto-generated method stub
             mAppInfoList = PackageInfoUtils.getAllApplicationInfos(AppManagerActivity.this);
-            mSystemAppInfoList = new ArrayList<AppInfo>();
-            mUserAppInfoList = new ArrayList<AppInfo>();
+            mSystemAppInfoList = new ArrayList<AppPackageInfo>();
+            mUserAppInfoList = new ArrayList<AppPackageInfo>();
             for (int i = 0; i < mAppInfoList.size(); i++) {
-                AppInfo appinfo = mAppInfoList.get(i);
+                AppPackageInfo appinfo = mAppInfoList.get(i);
                 if (appinfo.isSystemApp()) {
                     mSystemAppInfoList.add(appinfo);
                 } else {
@@ -112,7 +112,7 @@ public class AppManagerActivity extends Activity {
     }
 
     private class ItemOnClickListener implements OnItemClickListener, OnClickListener {
-        private AppInfo mAppInfo;
+        private AppPackageInfo mAppInfo;
         private LinearLayout ll_uninstall;
         private LinearLayout ll_onstart;
         private LinearLayout ll_onshare;
@@ -223,7 +223,7 @@ public class AppManagerActivity extends Activity {
     private class ItemAdapter extends BaseAdapter {
         private View view;
         private ViewHolder viewHolder;
-        private AppInfo mAppInfo;
+        private AppPackageInfo mAppInfo;
 
         private class ViewHolder {
             private ImageView iv_appIcon;
@@ -305,7 +305,7 @@ public class AppManagerActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
             String packageName = intent.getDataString().replace("package:", "");
-            AppInfo appinfo = null;
+            AppPackageInfo appinfo = null;
             for (int i = 0; i < mUserAppInfoList.size(); i++) {
                 appinfo = mUserAppInfoList.get(i);
                 if (packageName.equals(appinfo.getPackageName()))

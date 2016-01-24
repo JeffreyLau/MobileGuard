@@ -34,6 +34,7 @@ public class HomeActivity extends Activity {
     public static final int APP_FUNCTION_LOSTFIND = 0;
     public static final int APP_FUNCTION_INTERCEPT = 1;
     public static final int APP_FUNCTION_APP_MANAGER = 2;
+    public static final int APP_FUNCTION_PROCESS_MANAGER = 3;
     public static final int APP_FUNCTION_COMMON_TOOLS = 7;
     private ImageView iv_log;
     private GridView gv_home_item;
@@ -99,13 +100,18 @@ public class HomeActivity extends Activity {
                                 AppManagerActivity.class);
                         startActivity(mxIntent);
                         break;
-
+                    case APP_FUNCTION_PROCESS_MANAGER:
+                        mxIntent = new Intent(HomeActivity.this,
+                                ProcessManagerActivity.class);
+                        startActivity(mxIntent);
+                        break;
                     case APP_FUNCTION_COMMON_TOOLS:
                         mxIntent = new Intent(HomeActivity.this,
                                 ToolsActivity.class);
                         startActivity(mxIntent);
                         break;
 
+                        
                     default:
                         break;
                 }
