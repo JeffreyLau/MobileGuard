@@ -6,7 +6,7 @@ import com.chaowei.mobileguard.MobileGuard;
 import com.chaowei.mobileguard.MgInCallStateService;
 import com.chaowei.mobileguard.R;
 import com.chaowei.mobileguard.ui.SwitchImageView;
-import com.chaowei.mobileguard.utils.ServiceStatusUtils;
+import com.chaowei.mobileguard.utils.SystemInfoUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -48,9 +48,9 @@ public class SettingActivity extends Activity {
 		siv_update.setSwitchStatus(sharedPreferences.getBoolean(
 				MobileGuard.APP_AUTO_UPDATE, false));
 
-		siv_showlocation.setSwitchStatus(ServiceStatusUtils.isServiceRuning(
+		siv_showlocation.setSwitchStatus(SystemInfoUtils.isServiceRuning(
 				this, MobileGuard.INCALL_LOCATION_SERVICE));
-		siv_intercep.setSwitchStatus(ServiceStatusUtils.isServiceRuning(this,
+		siv_intercep.setSwitchStatus(SystemInfoUtils.isServiceRuning(this,
 				MobileGuard.INCALL_STATE_SERVICE));
 
 		rl_setting_showlocation = (RelativeLayout) findViewById(R.id.rl_setting_showlocation);

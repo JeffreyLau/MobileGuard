@@ -149,14 +149,17 @@ public class SplashActivity extends Activity {
                 case BaseTracker.DOWNLOAD_ON_FINSH:
                     ar = (AsyncResult) msg.obj;
                     mDownloadInfo = (DownloadInfo) ar.result;
-                    Intent intent = new Intent();
                     fl_update_opp.setVisibility(View.INVISIBLE);
                     pd_update_opp.dismiss();
-                    intent.setAction("android.intent.action.VIEW");
-                    intent.addCategory("android.intent.category.DEFAULT");
-                    intent.setDataAndType(Uri.fromFile(mDownloadInfo.getFile()),
-                            "application/vnd.android.package-archive");
-                    startActivity(intent);
+                    PackageInfoUtils.installApplication(SplashActivity.this,
+                            mDownloadInfo.getFile());
+//                    Intent intent = new Intent();
+//                    intent.setAction("android.intent.action.VIEW");
+//                    intent.addCategory("android.intent.category.DEFAULT");
+//                    intent.setDataAndType(Uri.fromFile(mDownloadInfo.getFile()),
+//                            "application/vnd.android.package-archive");
+//                    startActivity(intent);
+
                     break;
                 case BaseTracker.DOWNLOAD_ON_START:
                     pd_update_opp = new ProgressDialog(SplashActivity.this);
