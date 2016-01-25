@@ -138,6 +138,7 @@ public class PackageInfoUtils {
             try {
                 RunningAppProcessInfo mRunningAppProcessInfo = mRunningInfos.get(i);
                 packageName = mRunningAppProcessInfo.processName;
+                //Log.i(TAG,"packageName:" + packageName);
                 PackageInfo mPackageInfo = mPackageManager.getPackageInfo(packageName, 0);
                 ApplicationInfo mApplicationInfo = mPackageInfo.applicationInfo;
                 appIcon = mApplicationInfo.loadIcon(mPackageManager);
@@ -213,5 +214,11 @@ public class PackageInfoUtils {
         MemoryInfo memoryInfo = new MemoryInfo();
         mActivityManager.getMemoryInfo(memoryInfo);
         return memoryInfo.availMem;
+    }
+
+    public static void killBackgroundProcesses(Context context, CharSequence packageName) {
+        ActivityManager mActivityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        mActivityManager.killBackgroundProcesses((String) packageName);
     }
 }

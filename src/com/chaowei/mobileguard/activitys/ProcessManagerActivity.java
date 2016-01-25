@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,9 +24,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class ProcessManagerActivity extends Activity {
 
+    private static final String TAG = "ProcessManagerActivity";
     private TextView tv_process_cnt;
     private TextView tv_memory_status;
     private ListView lv_all_process;
@@ -34,8 +37,11 @@ public class ProcessManagerActivity extends Activity {
     private List<AppProcessInfo> mProcessInfoList;
     private List<AppProcessInfo> mSystemProcessInfoList;
     private List<AppProcessInfo> mUserProcessInfoList;
+    private List<AppProcessInfo> mKillProcessInfoList;
     private ItemAdapter mItemAdapter;
-    private ItemAdapter.ViewHolder mViewHolder;
+
+    private int runningProcessCount;
+    private long availableMemSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +50,8 @@ public class ProcessManagerActivity extends Activity {
         setContentView(R.layout.activity_process_manager);
         tv_process_cnt = (TextView) findViewById(R.id.tv_process_cnt);
         tv_memory_status = (TextView) findViewById(R.id.tv_memory_status);
-        tv_process_cnt.setText("运行中进程:" + PackageInfoUtils.getRunningProcessesCount(this));
-        tv_memory_status.setText("可用内存:"
-                + Formatter.formatFileSize(this, PackageInfoUtils.getAvailableMemory(this)));
+        tv_process_cnt.setVisibility(View.INVISIBLE);
+        tv_memory_status.setVisibility(View.INVISIBLE);
         lv_all_process = (ListView) findViewById(R.id.lv_all_process);
         ll_load_layout = (LinearLayout) findViewById(R.id.ll_load_layout);
         ll_load_layout.setVisibility(View.VISIBLE);
@@ -62,6 +67,7 @@ public class ProcessManagerActivity extends Activity {
                     .getRunningAppProcessInfos(ProcessManagerActivity.this);
             mSystemProcessInfoList = new ArrayList<AppProcessInfo>();
             mUserProcessInfoList = new ArrayList<AppProcessInfo>();
+
             for (int i = 0; i < mProcessInfoList.size(); i++) {
                 AppProcessInfo processinfo = mProcessInfoList.get(i);
                 if (processinfo.isSystemApp()) {
@@ -77,7 +83,17 @@ public class ProcessManagerActivity extends Activity {
                     ll_load_layout.setVisibility(View.INVISIBLE);
                     mItemAdapter = new ItemAdapter();
                     lv_all_process.setAdapter(mItemAdapter);
-
+                    tv_process_cnt.setVisibility(View.VISIBLE);
+                    tv_memory_status.setVisibility(View.VISIBLE);
+                    runningProcessCount = PackageInfoUtils
+                            .getRunningProcessesCount(ProcessManagerActivity.this);
+                    availableMemSize = PackageInfoUtils
+                            .getAvailableMemory(ProcessManagerActivity.this);
+                    tv_process_cnt.setText("运行中进程:"
+                            + runningProcessCount);
+                    tv_memory_status.setText("可用内存:"
+                            + Formatter.formatFileSize(ProcessManagerActivity.this,
+                                    availableMemSize));
                 }
             });
 
@@ -162,31 +178,127 @@ public class ProcessManagerActivity extends Activity {
                 viewHolder.tv_processLabel = (TextView) view.findViewById(R.id.tv_processLabel);
                 viewHolder.tv_processMemsize = (TextView) view.findViewById(R.id.tv_processMemsize);
                 viewHolder.cb_processClean = (CheckBox) view.findViewById(R.id.cb_processClean);
-                // viewHolder.bt_appUninstall = (Button)
-                // view.findViewById(R.id.bt_appUninstall);
                 view.setTag(viewHolder);
             }
+            if (getPackageName().equals(mProcessinfo.getPackageName()))
+                viewHolder.cb_processClean.setVisibility(View.INVISIBLE);
+            else
+                viewHolder.cb_processClean.setVisibility(View.VISIBLE);
             viewHolder.iv_processIcon.setImageDrawable(mProcessinfo.getAppIcon());
             viewHolder.tv_processLabel.setText(mProcessinfo.getAppLabel());
             viewHolder.tv_processMemsize.setText(
                     Formatter.formatFileSize(getApplication(), mProcessinfo.getMemSize()));
-            mViewHolder = viewHolder;
+            viewHolder.cb_processClean.setChecked(mProcessinfo.isChecked());
             return view;
         }
     }
 
     private class ItemOnClickListener implements OnItemClickListener {
+
+        private AppProcessInfo mProcessinfo;
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             // TODO Auto-generated method stub
             Object obj = lv_all_process.getItemAtPosition(position);
             if (obj != null) {
-                if (mViewHolder != null)
-                    mViewHolder.cb_processClean.
-                            setChecked(!mViewHolder.cb_processClean.isChecked());
+                mProcessinfo = (AppProcessInfo) obj;
+                if(getPackageName().equals(mProcessinfo.getPackageName()))
+                    return;
+                CheckBox cb_processClean = (CheckBox) view.findViewById(R.id.cb_processClean);
+                cb_processClean.setChecked(!mProcessinfo.isChecked());
+                mProcessinfo.setChecked(!mProcessinfo.isChecked());
+            }
+        }
+    }
+
+    public void killSelectedProcess(View v) {
+        mKillProcessInfoList = new ArrayList<AppProcessInfo>();
+        if (mUserProcessInfoList != null) {
+            for (int i = 0; i < mUserProcessInfoList.size(); i++) {
+                AppProcessInfo mAppProcessInfo = mUserProcessInfoList.get(i);
+                if (mAppProcessInfo.isChecked()) {
+                    PackageInfoUtils.killBackgroundProcesses(ProcessManagerActivity.this,
+                            mAppProcessInfo.getPackageName());
+                    mKillProcessInfoList.add(mAppProcessInfo);
+                }
             }
         }
 
+        if (mSystemProcessInfoList != null) {
+            for (int i = 0; i < mSystemProcessInfoList.size(); i++) {
+                AppProcessInfo mAppProcessInfo = mSystemProcessInfoList.get(i);
+                if (mAppProcessInfo.isChecked()) {
+                    PackageInfoUtils.killBackgroundProcesses(ProcessManagerActivity.this,
+                            mAppProcessInfo.getPackageName());
+                    mKillProcessInfoList.add(mAppProcessInfo);
+                }
+            }
+        }
+        long totalFreshMem = 0;
+        int totalFreshProcess = 0;
+        for (AppProcessInfo info : mKillProcessInfoList) {
+            if (info.isSystemApp())
+                mSystemProcessInfoList.remove(info);
+            else
+                mUserProcessInfoList.remove(info);
+            totalFreshProcess++;
+            totalFreshMem += info.getMemSize();
+
+        }
+        runningProcessCount -= totalFreshProcess;
+        availableMemSize += totalFreshMem;
+        Toast.makeText(
+                ProcessManagerActivity.this,
+                "共清理了" + totalFreshProcess + "个进程并释放了"
+                        + Formatter.formatFileSize(ProcessManagerActivity.this,
+                                totalFreshMem) + "内存", Toast.LENGTH_SHORT).show();
+        tv_process_cnt.setText("运行中进程:"
+                + runningProcessCount);
+        tv_memory_status.setText("可用内存:"
+                + Formatter.formatFileSize(ProcessManagerActivity.this,
+                        availableMemSize));
+        mItemAdapter.notifyDataSetChanged();
+    }
+
+    public void selectAllProcess(View v) {
+        if (mUserProcessInfoList != null) {
+            for (int i = 0; i < mUserProcessInfoList.size(); i++) {
+                AppProcessInfo mAppProcessInfo = mUserProcessInfoList.get(i);
+                if (getPackageName().equals(mAppProcessInfo.getPackageName()))
+                    continue;
+                mAppProcessInfo.setChecked(true);
+            }
+        }
+
+        if (mSystemProcessInfoList != null) {
+            for (int i = 0; i < mSystemProcessInfoList.size(); i++) {
+                AppProcessInfo mAppProcessInfo = mSystemProcessInfoList.get(i);
+                mAppProcessInfo.setChecked(true);
+            }
+        }
+
+        mItemAdapter.notifyDataSetChanged();
+
+    }
+
+    public void selectOtherProcess(View v) {
+        if (mUserProcessInfoList != null) {
+            for (int i = 0; i < mUserProcessInfoList.size(); i++) {
+                AppProcessInfo mAppProcessInfo = mUserProcessInfoList.get(i);
+                if (getPackageName().equals(mAppProcessInfo.getPackageName()))
+                    continue;
+                mAppProcessInfo.setChecked(!mAppProcessInfo.isChecked());
+            }
+        }
+
+        if (mSystemProcessInfoList != null) {
+            for (int i = 0; i < mSystemProcessInfoList.size(); i++) {
+                AppProcessInfo mAppProcessInfo = mSystemProcessInfoList.get(i);
+                mAppProcessInfo.setChecked(!mAppProcessInfo.isChecked());
+            }
+        }
+        mItemAdapter.notifyDataSetChanged();
     }
 
 }

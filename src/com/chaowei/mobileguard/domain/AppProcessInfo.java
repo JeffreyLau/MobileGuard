@@ -9,6 +9,13 @@ public class AppProcessInfo extends AppItemInfo {
      */
     private int pid;
 
+    private boolean isChecked;
+    public boolean isChecked() {
+        return isChecked;
+    }
+    public void setChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+    }
     /**
      * The user id of this process.
      */
