@@ -33,7 +33,8 @@ public class ProcessManagerActivity extends Activity {
     private TextView tv_memory_status;
     private ListView lv_all_process;
     private LinearLayout ll_load_layout;
-
+    private LinearLayout ll_process_opp;
+    
     private List<AppProcessInfo> mProcessInfoList;
     private List<AppProcessInfo> mSystemProcessInfoList;
     private List<AppProcessInfo> mUserProcessInfoList;
@@ -53,6 +54,8 @@ public class ProcessManagerActivity extends Activity {
         tv_process_cnt.setVisibility(View.INVISIBLE);
         tv_memory_status.setVisibility(View.INVISIBLE);
         lv_all_process = (ListView) findViewById(R.id.lv_all_process);
+        ll_process_opp =(LinearLayout) findViewById(R.id.ll_process_opp);
+        ll_process_opp.setVisibility(View.INVISIBLE);
         ll_load_layout = (LinearLayout) findViewById(R.id.ll_load_layout);
         ll_load_layout.setVisibility(View.VISIBLE);
         new ItemAdapterThread().start();
@@ -85,6 +88,7 @@ public class ProcessManagerActivity extends Activity {
                     lv_all_process.setAdapter(mItemAdapter);
                     tv_process_cnt.setVisibility(View.VISIBLE);
                     tv_memory_status.setVisibility(View.VISIBLE);
+                    ll_process_opp.setVisibility(View.VISIBLE);
                     runningProcessCount = PackageInfoUtils
                             .getRunningProcessesCount(ProcessManagerActivity.this);
                     availableMemSize = PackageInfoUtils
